@@ -1,0 +1,123 @@
+#: import Factory kivy.factory.kivy
+
+<MainLayout>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: .5, .5, .5, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    scroller: scroll
+
+
+    BoxLayout:                          # Upper menu bar
+        size_hint_y: 0.07
+
+        Button:
+            text:'Settings'
+            color: 0, 0, 0, 1
+            on_release: root.open_popup()
+        Button:
+            text:'Go'
+            color: 0, 0, 0, 1
+            on_press: root.toggle_check_orders_thread()
+
+    BoxLayout:                          # Second menu bar
+        size_hint_y: 0.1
+        Bubble:
+            BubbleButton:
+                text: 'Market'
+        Bubble:
+            BubbleButton:
+                text: 'Sell quantity'
+        Bubble:
+            BubbleButton:
+                text: 'Percent gain'
+        Label
+
+
+    ScrollView:                         # Data printing(comes from GUI python file)
+        GridLayout:
+            id: scroll
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+
+<MyOrder>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    spacing: 3
+    padding: 10
+
+    GridLayout:                         # Sell Quantity
+        cols: 2
+        rows: 3
+        TextInput:
+            text: '70'
+            multiline: False
+        Button:
+            text: '%'
+        TextInput:
+            text: '20'
+            multiline: False
+        Button:
+            text: '%'
+        TextInput:
+            text: '10'
+            multiline: False
+        Button:
+            text: '%'
+
+    GridLayout:                         # Percent gain
+        cols: 2
+        rows: 3
+        TextInput:
+            text: '17'
+            multiline: False
+        Button:
+            text: '%'
+        TextInput:
+            text: '12'
+            multiline: False
+        Button:
+            text: '%'
+        TextInput:
+            text: '8'
+            multiline: False
+        Button:
+            text: '%'
+
+    Button:
+        text: 'Confirm'
+
+
+
+
+<MyLabel>:
+    font_size: 200
+    text_size: self.width, None
+    size_hint_y: None
+    height: self.texture_size[1]
+
+<SettingsPopup>:
+    auto_dismiss: False
+    title: 'Settings'
+    size_hint: 0.8,0.8
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint: 0.2, 0.2
+            orientation: 'vertical'
+            TextInput:
+                text: 'Key'
+            TextInput:
+                text: 'Secret'
+            Label:
+                size_hint_y: 0.7
+                text: ' '
+        Button:
+            height: 5
+            text: 'Close me!'
+            on_release: root.dismiss()
